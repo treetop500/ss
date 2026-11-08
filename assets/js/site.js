@@ -127,7 +127,7 @@ const SITE = {
       if (bad && !firstBad) firstBad = f;
     });
     if (firstBad) {
-      status.textContent = 'Please add your name, phone and the building address.';
+      status.textContent = 'Please add your name, phone and address.';
       status.classList.add('err');
       firstBad.focus();
       return;
@@ -154,8 +154,8 @@ const SITE = {
 
     // No endpoint yet: hand off to the visitor's email app, pre-filled.
     const body = [
-      `Name: ${data.name}`, `Company: ${data.company || '-'}`, `Phone: ${data.phone}`, `Email: ${data.email || '-'}`,
-      `Building address: ${data.address}`, `Service: ${data.service}`, `How soon: ${data.urgency}`, '', data.message || ''
+      `For: ${data.property}`, `Name: ${data.name}`, `Phone: ${data.phone}`,
+      `Address: ${data.address}`, `Service: ${data.service}`, '', data.message || ''
     ].join('\n');
     location.href = `mailto:${SITE.email}?subject=${encodeURIComponent(`Service request: ${data.service}`)}&body=${encodeURIComponent(body)}`;
     status.textContent = 'Opening your email app with the request filled in…';

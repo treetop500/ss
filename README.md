@@ -11,7 +11,7 @@ Static site with no build step. Open `index.html` or serve the folder (`python3 
 2. Set `formEndpoint` to a form service URL. Until then the form opens a pre-filled email.
 3. Replace each `.ph` placeholder with a photo, e.g. `<div class="card-media ph"><img src="..." alt="..." loading="lazy"></div>`. The placeholder label hides automatically.
    - Service cards: 4:3 landscape
-   - Air distribution and maintenance panels: tall portrait (9:16)
+   - Homes / Businesses / Maintenance panels: tall portrait (9:16)
    - "Recent projects": real M&H job photos only
 4. Have the services list and wording confirmed by M&H.
 
