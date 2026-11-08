@@ -12,7 +12,7 @@ const SITE = {
   phone2: '347-320-5867',
   phone2E164: '+13473205867',
   email: 'moe101221@gmail.com',
-  hours: '',   // e.g. 'Mon–Sat, 7am–7pm' (row stays hidden while empty)
+  hours: '24/7',
   area: '',    // e.g. 'All five boroughs' (row stays hidden while empty)
   formEndpoint: ''
 };
@@ -167,6 +167,12 @@ const SITE = {
     status.classList.add('ok');
   });
   $$('[required]', form).forEach(f => f.addEventListener('input', () => f.removeAttribute('aria-invalid')));
+
+  /* Van: only drive while the emergency section is on screen */
+  const van = $('[data-van]');
+  if (van && 'IntersectionObserver' in window) {
+    new IntersectionObserver(([e]) => van.classList.toggle('is-driving', e.isIntersecting), { threshold: 0.1 }).observe(van.closest('section'));
+  } else if (van) van.classList.add('is-driving');
 
   /* Work gallery: filters, "show all", lightbox */
   const tiles = $$('[data-work] .w');
