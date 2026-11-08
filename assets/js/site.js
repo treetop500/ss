@@ -7,11 +7,13 @@
    Left empty, the form opens a pre-filled email to `email` instead.
 ------------------------------------------------------------------- */
 const SITE = {
-  phone: '(000) 000-0000',      // TODO: real number
-  phoneE164: '+10000000000',    // TODO: same number, +1XXXXXXXXXX
-  email: 'service@example.com', // TODO: real inbox
-  hours: '[hours]',             // TODO e.g. 'Mon–Fri, 7am–5pm'
-  area: '[service area]',       // TODO e.g. 'the Greater Houston area'
+  phone: '347-951-4761',
+  phoneE164: '+13479514761',
+  phone2: '347-320-5867',
+  phone2E164: '+13473205867',
+  email: 'moe101221@gmail.com',
+  hours: '',   // e.g. 'Mon–Sat, 7am–7pm' (row stays hidden while empty)
+  area: '',    // e.g. 'All five boroughs' (row stays hidden while empty)
   formEndpoint: ''
 };
 
@@ -25,8 +27,11 @@ const SITE = {
   $$('[data-tel]').forEach(el => (el.href = `tel:${SITE.phoneE164}`));
   $$('[data-email]').forEach(el => (el.textContent = SITE.email));
   $$('[data-mailto]').forEach(el => (el.href = `mailto:${SITE.email}`));
+  $$('[data-phone2]').forEach(el => (el.textContent = SITE.phone2));
+  $$('[data-tel2]').forEach(el => (el.href = `tel:${SITE.phone2E164}`));
   $$('[data-hours]').forEach(el => (el.textContent = SITE.hours));
   $$('[data-area]').forEach(el => (el.textContent = SITE.area));
+  ['hours', 'area', 'phone2'].forEach(k => { if (!SITE[k]) $$(`[data-row="${k}"]`).forEach(el => (el.hidden = true)); });
   $$('[data-year]').forEach(el => (el.textContent = new Date().getFullYear()));
 
   /* Header, hero meter and mobile action bar: one rAF-throttled scroll pass */
@@ -162,4 +167,81 @@ const SITE = {
     status.classList.add('ok');
   });
   $$('[required]', form).forEach(f => f.addEventListener('input', () => f.removeAttribute('aria-invalid')));
+
+  /* Work gallery: filters, "show all", lightbox */
+  const tiles = $$('[data-work] .w');
+  const moreBtn = $('[data-more]');
+  const LIMIT = 12;
+  let filter = 'all';
+  let expanded = false;
+  function applyFilter() {
+    let shown = 0;
+    tiles.forEach(t => {
+      const match = filter === 'all' || t.dataset.cat === filter;
+      const visible = match && (filter !== 'all' || expanded || shown < LIMIT);
+      if (match) shown++;
+      t.hidden = !visible;
+    });
+    moreBtn.parentElement.hidden = filter !== 'all' || expanded || tiles.length <= LIMIT;
+  }
+  $$('[data-filters] .chip').forEach(chip => chip.addEventListener('click', () => {
+    filter = chip.dataset.filter;
+    $$('[data-filters] .chip').forEach(c => { const on = c === chip; c.classList.toggle('is-on', on); c.setAttribute('aria-pressed', String(on)); });
+    chip.scrollIntoView({ block: 'nearest', inline: 'center', behavior: reduced.matches ? 'auto' : 'smooth' });
+    applyFilter();
+  }));
+  moreBtn.addEventListener('click', () => { expanded = true; applyFilter(); });
+  applyFilter();
+
+  // Video tiles play silently only while on screen.
+  if ('IntersectionObserver' in window && !reduced.matches) {
+    const vio = new IntersectionObserver(es => es.forEach(e => {
+      const v = e.target.querySelector('video');
+      if (e.isIntersecting) { v.preload = 'auto'; v.play().catch(() => {}); } else v.pause();
+    }), { threshold: 0.4 });
+    tiles.filter(t => t.dataset.video).forEach(t => vio.observe(t));
+  }
+
+  const lb = $('[data-lightbox]');
+  const lbMedia = $('[data-lb-media]');
+  const lbCap = $('[data-lb-cap]');
+  let current = 0;
+  const visibleTiles = () => tiles.filter(t => !t.hidden);
+  function show(tile) {
+    const list = visibleTiles();
+    current = list.indexOf(tile);
+    const cap = tile.querySelector('figcaption').textContent;
+    lbMedia.replaceChildren();
+    if (tile.dataset.video) {
+      const v = document.createElement('video');
+      Object.assign(v, { src: tile.dataset.video, poster: tile.dataset.full, controls: true, autoplay: true, muted: true, loop: true, playsInline: true });
+      lbMedia.append(v);
+    } else {
+      const img = new Image();
+      img.alt = cap; img.src = tile.dataset.full;
+      lbMedia.append(img);
+    }
+    lbCap.textContent = cap;
+  }
+  function step(d) { const list = visibleTiles(); show(list[(current + d + list.length) % list.length]); }
+  let lastFocus = null;
+  tiles.forEach(t => t.querySelector('.w-btn').addEventListener('click', () => {
+    lastFocus = document.activeElement;
+    show(t);
+    lb.showModal();
+    document.body.classList.add('lb-open');
+  }));
+  lb.addEventListener('close', () => { lbMedia.replaceChildren(); document.body.classList.remove('lb-open'); if (lastFocus) lastFocus.focus({ preventScroll: true }); });
+  $('[data-lb-close]').addEventListener('click', () => lb.close());
+  $('[data-lb-prev]').addEventListener('click', () => step(-1));
+  $('[data-lb-next]').addEventListener('click', () => step(1));
+  lb.addEventListener('click', e => { if (e.target === lb || e.target.classList.contains('lb-media')) lb.close(); });
+  lb.addEventListener('keydown', e => { if (e.key === 'ArrowRight') step(1); if (e.key === 'ArrowLeft') step(-1); });
+  let sx = 0, sy = 0;
+  lb.addEventListener('touchstart', e => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
+  lb.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) step(dx < 0 ? 1 : -1);
+    else if (dy > 90) lb.close();
+  }, { passive: true });
 })();
