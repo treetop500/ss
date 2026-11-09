@@ -590,3 +590,11 @@ body.lb-open { overflow: hidden; }
 .sc-txt strong { font-size: 17px; font-weight: 800; letter-spacing: -.01em; }
 .sc-txt small { font-size: 13px; opacity: .85; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 @media (max-width: 1100px) { .social-cards { grid-template-columns: 1fr; max-width: 420px; } }
+.follow { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.follow-total { font-size: clamp(28px, 2.6vw, 36px); font-weight: 900; letter-spacing: -.03em; color: var(--navy); text-transform: none; }
+.sc-txt strong { font-size: 19px; }
+@media (min-width: 1101px) {
+  .sc { flex-direction: column; align-items: flex-start; gap: 14px; padding: 18px; }
+  .sc-txt strong { font-size: 22px; }
+  .sc-txt small { white-space: normal; }
+}
