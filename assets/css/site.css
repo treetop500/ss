@@ -630,3 +630,54 @@ body.lb-open { overflow: hidden; }
 }
 /* Emergency now sits right under the hero: tighter top padding */
 .emergency { padding-top: clamp(80px, 10vw, 150px); }
+
+/* =========================================================
+   Walkthrough (scroll-driven film)
+   ========================================================= */
+.tour-on .walk { height: calc(var(--tour-length, 520) * 1svh); }
+.hero-media picture, .hero-media picture img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.tour-on .hero-media > picture img { animation: none; transform: none; }
+.tour-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; opacity: 0; transition: opacity .35s; }
+.tour-canvas.on { opacity: 1; }
+.tour-label { font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; opacity: .85; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.tour-skip { display: none; margin-left: auto; color: #fff; font-size: 13px; font-weight: 700; text-decoration: none; padding: 10px 14px; border-radius: 999px; background: #0b1a4499; border: 1px solid #ffffff55; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); white-space: nowrap; }
+.tour-on .tour-skip { display: inline-flex; }
+.title { transition: none; will-change: opacity, transform; }
+
+#rooms { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+.tour-room { position: absolute; left: max(var(--gutter), env(safe-area-inset-left)); right: max(var(--gutter), env(safe-area-inset-right)); bottom: max(15svh, 120px); max-width: 900px; opacity: 0; visibility: hidden; text-shadow: 0 2px 24px #000a; }
+.tour-room .eyebrow { color: #ffd2c7; }
+.tour-room h2 { font-size: clamp(44px, 7vw, 104px); line-height: .94; color: #fff; }
+.tour-room p:last-child { margin-top: 18px; font-size: clamp(17px, 1.4vw, 21px); color: #eef1fb; max-width: 36ch; }
+
+.tour-showcase { position: absolute; inset: 0; z-index: 3; opacity: 0; visibility: hidden; overflow: hidden; background: var(--navy); }
+.tour-head { position: absolute; z-index: 2; top: calc(var(--header-h) + 28px); left: var(--gutter); right: var(--gutter); text-align: center; text-shadow: 0 2px 24px #000b; pointer-events: none; }
+.tour-head .eyebrow { color: #fff; opacity: .85; }
+.tour-head h2 { font-size: clamp(30px, 3.6vw, 56px); color: #fff; }
+.tour-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); width: 100%; height: 100%; }
+.tour-grid figure { position: relative; margin: 0; overflow: hidden; }
+.tour-grid figure + figure { box-shadow: inset 1px 0 0 #ffffff30; }
+.tour-grid img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.tour-grid figure::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, #070f2ab3 0%, #070f2a26 26%, transparent 40%, transparent 55%, #070f2ac4 78%, #070f2af5 100%); pointer-events: none; }
+.tour-grid figcaption { position: absolute; z-index: 1; left: clamp(22px, 3vw, 52px); right: clamp(22px, 3vw, 52px); bottom: clamp(70px, 11svh, 140px); color: #fff; }
+.tour-grid h3 { font-family: var(--serif); font-weight: 400; font-size: clamp(34px, 3.4vw, 58px); line-height: 1; letter-spacing: -.02em; font-stretch: 100%; }
+.tour-grid figcaption p { margin-top: 10px; font-size: clamp(15px, 1.1vw, 18px); color: #e6eaf8; }
+
+@media (max-width: 850px) {
+  .tour-grid { width: 300%; transform: translate3d(var(--pan, 0%), 0, 0); will-change: transform; }
+  .tour-grid h3 { font-size: 42px; }
+  .tour-grid figcaption { left: 24px; right: 24px; bottom: 96px; }
+  .tour-head h2 { font-size: clamp(26px, 7vw, 36px); max-width: 16ch; margin-inline: auto; }
+}
+@media (max-width: 650px) {
+  .tour-room { bottom: max(110px, 14svh); }
+  .tour-room h2 { font-size: clamp(42px, 12.5vw, 64px); }
+  .tour-label { display: none; }
+}
+@media (max-height: 520px) and (orientation: landscape) {
+  .tour-room { bottom: 56px; }
+  .tour-room h2 { font-size: clamp(30px, 5vw, 48px); }
+  .tour-grid figcaption { bottom: 40px; }
+  .tour-head { top: 64px; }
+}
+.tour-on .stage::after { background: linear-gradient(180deg, #070f2a8c 0%, transparent 18%, transparent 52%, #070f2ad0 100%), linear-gradient(90deg, #070f2a59, transparent 55%); }

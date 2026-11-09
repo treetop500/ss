@@ -55,7 +55,7 @@ const SITE = {
     const heroH = walk ? walk.offsetHeight : innerHeight;
     header.classList.toggle('is-solid', y > heroH - 90);
     if (meter) meter.style.setProperty('--progress', Math.min(1, Math.max(0, y / heroH)).toFixed(3));
-    if (bar) bar.classList.toggle('is-on', y > heroH * 0.6 && !requestVisible);
+    if (bar) bar.classList.toggle('is-on', y > innerHeight * 0.6 && !requestVisible);
   }
   const schedule = () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } };
   addEventListener('scroll', schedule, { passive: true });
