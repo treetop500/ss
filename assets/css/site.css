@@ -565,3 +565,28 @@ body.lb-open { overflow: hidden; }
   .svc-row .card-media, .svc-bento .card-feature .card-media { aspect-ratio: 4 / 3; flex: none; min-height: 0; }
   .svc-row .card h3 { font-size: 24px; }
 }
+
+/* ---------- Service art ---------- */
+.svc-four { grid-template-columns: repeat(4, 1fr); }
+.card-art .card-media { background: #f6dfc8; }
+.card-art .card-media img { object-fit: cover; }
+.svc-bento .card-feature.card-art .card-media img { object-position: 50% 60%; }
+@media (max-width: 1100px) and (min-width: 851px) { .svc-four { grid-template-columns: repeat(2, 1fr); } }
+
+/* ---------- Meet Mo tag + social cards ---------- */
+.mo-tag { display: flex; align-items: center; flex-wrap: wrap; gap: 14px; margin-bottom: 22px; }
+.mo-tag span { font-size: clamp(22px, 2.2vw, 30px); font-weight: 800; letter-spacing: -.02em; color: var(--red); }
+.mo-tag b { font-size: 13px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #fff; background: var(--navy); padding: 8px 14px; border-radius: 999px; }
+.follow { font-size: 13px; }
+.social-cards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.sc { display: flex; align-items: center; gap: 12px; min-height: 76px; padding: 14px; border-radius: 18px; color: #fff; text-decoration: none; transition: transform .25s var(--ease), box-shadow .25s var(--ease); }
+.sc:hover { transform: translateY(-3px); box-shadow: 0 18px 30px -18px #0b1a44aa; }
+.sc-ig { background: linear-gradient(135deg, #f9ce34 0%, #ee2a7b 45%, #6228d7 100%); }
+.sc-tt { background: #111; box-shadow: inset 3px 0 0 #25f4ee, inset -3px 0 0 #fe2c55; }
+.sc-fb { background: #1877f2; }
+.sc-ic { flex: none; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 12px; background: #ffffff26; }
+.sc-ic svg { width: 24px; height: 24px; }
+.sc-txt { display: grid; min-width: 0; line-height: 1.2; }
+.sc-txt strong { font-size: 17px; font-weight: 800; letter-spacing: -.01em; }
+.sc-txt small { font-size: 13px; opacity: .85; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+@media (max-width: 1100px) { .social-cards { grid-template-columns: 1fr; max-width: 420px; } }

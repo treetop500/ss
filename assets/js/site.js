@@ -14,7 +14,9 @@ const SITE = {
   email: 'moe101221@gmail.com',
   hours: '24/7',
   area: '',    // e.g. 'All five boroughs' (row stays hidden while empty)
-  formEndpoint: ''
+  formEndpoint: '',
+  // Follower counts shown on the social cards, e.g. '12.4K'. Empty shows the platform name.
+  followers: { instagram: '', tiktok: '', facebook: '' }
 };
 
 (() => {
@@ -33,6 +35,10 @@ const SITE = {
   $$('[data-area]').forEach(el => (el.textContent = SITE.area));
   ['hours', 'area', 'phone2'].forEach(k => { if (!SITE[k]) $$(`[data-row="${k}"]`).forEach(el => (el.hidden = true)); });
   $$('[data-year]').forEach(el => (el.textContent = new Date().getFullYear()));
+  $$('[data-count]').forEach(el => {
+    const n = SITE.followers[el.dataset.count];
+    if (n) el.textContent = `${n} followers`;
+  });
 
   /* Header, hero meter and mobile action bar: one rAF-throttled scroll pass */
   const header = $('[data-header]');
