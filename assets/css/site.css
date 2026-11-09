@@ -598,3 +598,35 @@ body.lb-open { overflow: hidden; }
   .sc-txt strong { font-size: 22px; }
   .sc-txt small { white-space: normal; }
 }
+
+/* ---------- Help cards (big, with art) ---------- */
+.help-cards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(14px, 1.8vw, 24px); }
+.help-card { position: relative; display: flex; flex-direction: column; height: 100%; border-radius: 24px; overflow: hidden; background: var(--white); border: 1px solid var(--line); text-decoration: none; color: var(--navy); transition: transform .3s var(--ease), box-shadow .3s var(--ease), border-color .3s var(--ease); -webkit-tap-highlight-color: transparent; }
+.help-card:hover { transform: translateY(-6px); box-shadow: 0 30px 50px -30px #0b1a4499; border-color: #0b1a4433; }
+.help-card:active { transform: scale(.98); }
+.help-art { display: block; aspect-ratio: 4 / 3.4; overflow: hidden; background: #f6dfc8; }
+.help-art img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease); }
+.help-card:hover .help-art img { transform: scale(1.05); }
+.help-text { display: grid; gap: 6px; padding: 22px 64px 26px 24px; }
+.help-text strong { font-size: clamp(22px, 1.9vw, 28px); font-weight: 800; line-height: 1.08; letter-spacing: -.03em; font-stretch: 92%; }
+.help-text small { font-size: 15px; color: var(--muted); }
+.help-go { position: absolute; right: 18px; bottom: 24px; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; color: #fff; font-size: 18px; transition: transform .3s var(--ease); }
+.help-card:hover .help-go { transform: translateX(4px); }
+.tone-red .help-go { background: var(--red); }
+.tone-blue .help-go { background: var(--blue); }
+.tone-navy .help-go { background: var(--navy); }
+.tone-red { box-shadow: inset 0 4px 0 var(--red); }
+.tone-blue { box-shadow: inset 0 4px 0 var(--blue); }
+.tone-navy { box-shadow: inset 0 4px 0 var(--navy); }
+@media (max-width: 1100px) { .help-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) {
+  .help-cards { gap: 10px; }
+  .help-card { border-radius: 18px; }
+  .help-art { aspect-ratio: 1 / 1; }
+  .help-text { padding: 14px 14px 52px; gap: 4px; }
+  .help-text strong { font-size: 19px; }
+  .help-text small { font-size: 13px; line-height: 1.35; }
+  .help-go { right: 12px; bottom: 12px; width: 32px; height: 32px; font-size: 15px; }
+}
+/* Emergency now sits right under the hero: tighter top padding */
+.emergency { padding-top: clamp(80px, 10vw, 150px); }
