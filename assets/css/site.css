@@ -712,3 +712,13 @@ body.lb-open { overflow: hidden; }
   .hero-actions { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); width: 100%; max-width: 420px; }
   .hero-actions .btn { width: 100%; min-width: 0; }
 }
+
+/* Phones: keep every walkthrough caption above the sticky Call / Book bar */
+@media (max-width: 850px) {
+  .stage { --bar: calc(76px + env(safe-area-inset-bottom, 0px)); }
+  .tour-on .guide { bottom: calc(var(--bar) + 10px); }
+  .tour-room { bottom: calc(var(--bar) + 70px); }
+  .tour-grid figcaption { bottom: calc(var(--bar) + 64px); }
+  .tour-item { padding-bottom: calc(var(--bar) + 64px); }
+}
+@media (max-width: 850px) { .tour-item { gap: 34px; } }
