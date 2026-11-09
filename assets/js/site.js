@@ -67,6 +67,21 @@ const SITE = {
     new IntersectionObserver(([e]) => { requestVisible = e.isIntersecting; schedule(); }, { threshold: 0.15 }).observe(request);
   }
 
+  /* Skip the walkthrough: jump straight past it (no smooth scroll through the film) */
+  $$('[data-skip-tour]').forEach(a => a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (!target) return;
+    e.preventDefault();
+    const pad = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
+    const y = target.getBoundingClientRect().top + scrollY - pad;
+    document.documentElement.style.scrollBehavior = 'auto';
+    scrollTo({ top: y, behavior: 'instant' });
+    document.documentElement.style.scrollBehavior = '';
+    target.setAttribute('tabindex', '-1');
+    target.focus({ preventScroll: true });
+    history.replaceState(null, '', a.getAttribute('href'));
+  }));
+
   /* Mobile menu */
   const toggle = $('[data-menu-toggle]');
   const menu = $('[data-menu]');

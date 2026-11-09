@@ -700,3 +700,11 @@ body.lb-open { overflow: hidden; }
 .tour-canvas { filter: none; }
 .item-media { box-shadow: 0 30px 60px -30px #000b, 0 0 0 1px #ffffff1f; }
 @media (pointer: coarse) { .tour-canvas { will-change: auto; } }
+.hero-actions .btn span { margin-left: 2px; }
+#emergency:focus { outline: none; }
+@media (min-width: 651px) { .hero-actions .btn { min-width: 0; } }
+@media (max-width: 650px) {
+  .hero-actions { display: grid; grid-template-columns: 1fr 1fr; max-width: 420px; }
+  .hero-actions .btn:first-child { grid-column: 1 / -1; }
+  .hero-actions .btn { min-height: 50px; padding-inline: 12px; }
+}
