@@ -697,3 +697,6 @@ body.lb-open { overflow: hidden; }
   .item-copy { transform: translate3d(0, calc((1 - var(--text)) * 24px), 0); }
   .item-copy h2 { font-size: clamp(40px, 11vw, 56px); }
 }
+.tour-canvas { filter: none; }
+.item-media { box-shadow: 0 30px 60px -30px #000b, 0 0 0 1px #ffffff1f; }
+@media (pointer: coarse) { .tour-canvas { will-change: auto; } }

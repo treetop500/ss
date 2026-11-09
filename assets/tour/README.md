@@ -20,3 +20,11 @@ Encodes: `desktop.mp4` 1920x1080 CRF 26, `phone.mp4` 720x1280 centered crop CRF 
 | Product still | job e405a7a7-8850-4055-bf6d-d024ba04dc72 (gpt_image_2_6, 2k, high), 2.75 credits |
 | Turntable | job 29b99a53-e262-4d03-a6c3-903d89c67ef7, kling3_0 pro, 5 s, start_image only, 8.75 credits |
 | Delivered | 121 frames; desktop 1920x1080, phone 4:3.4 center crop |
+
+## Full route (Nov 9)
+Films (Kling 3.0, 4K master, first+last frame): 01 street→deli (10 s), 02 deli→back room, 03 back room→basement, 04 basement→roof (5 s each).
+Films ship as `desktop.mp4` 2560x1440 and `phone.mp4` 1080x1920, GOP 6, no B-frames.
+Spins (Kling 3.0 pro, 5 s, start frame only) ship as `d.pack` / `p.pack`: 61 WebP frames in one file
+(uint32 count, uint32 lengths[count], bytes). Loaded with one request and drawn from memory, so spinning never seeks.
+Known: 04 rises from basement to roof with a vertical wipe rather than a true camera climb.
+Rebuild counts with the manifest script after replacing media; `manifest.json` `script` defines the order.

@@ -1,1 +1,75 @@
-{"frames":{"01-street-to-deli":241,"item-walk-in-cooler":121}}
+{
+ "script": [
+  {
+   "type": "film",
+   "name": "01-street-to-deli",
+   "chapter": "deli"
+  },
+  {
+   "type": "showcase"
+  },
+  {
+   "type": "film",
+   "name": "02-deli-to-backroom",
+   "chapter": "backroom"
+  },
+  {
+   "type": "item",
+   "name": "item-walk-in-cooler"
+  },
+  {
+   "type": "item",
+   "name": "item-walk-in-freezer"
+  },
+  {
+   "type": "film",
+   "name": "03-backroom-to-basement",
+   "chapter": "basement"
+  },
+  {
+   "type": "item",
+   "name": "item-boiler"
+  },
+  {
+   "type": "item",
+   "name": "item-water-heater"
+  },
+  {
+   "type": "item",
+   "name": "item-unit-heater"
+  },
+  {
+   "type": "item",
+   "name": "item-ductwork"
+  },
+  {
+   "type": "film",
+   "name": "04-basement-to-roof",
+   "chapter": "roof"
+  },
+  {
+   "type": "item",
+   "name": "item-split-system"
+  },
+  {
+   "type": "item",
+   "name": "item-service-install"
+  }
+ ],
+ "films": {
+  "01-street-to-deli": 241,
+  "02-deli-to-backroom": 121,
+  "03-backroom-to-basement": 121,
+  "04-basement-to-roof": 121
+ },
+ "spins": {
+  "item-walk-in-cooler": 61,
+  "item-walk-in-freezer": 61,
+  "item-boiler": 61,
+  "item-water-heater": 61,
+  "item-unit-heater": 61,
+  "item-ductwork": 61,
+  "item-split-system": 61,
+  "item-service-install": 61
+ }
+}
