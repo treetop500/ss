@@ -1,0 +1,10 @@
+/assets/tour/*
+  Cache-Control: public, max-age=604800
+/assets/tour/*/d.pack
+  Content-Type: application/octet-stream
+/assets/tour/*/p.pack
+  Content-Type: application/octet-stream
+/assets/work/*
+  Cache-Control: public, max-age=604800
+/assets/art/*
+  Cache-Control: public, max-age=604800
