@@ -13,3 +13,10 @@ Pilot leg `01-street-to-deli` (illustrative concept building, not a client job).
 
 Encodes: `desktop.mp4` 1920x1080 CRF 26, `phone.mp4` 720x1280 centered crop CRF 26; both 24 fps, GOP 6, no B-frames, faststart.
 `manifest.json` holds the delivered frame count. The host must answer HTTP Range requests (206) or seeking fails; the player then falls back to the start/end posters.
+
+## Item: walk-in cooler (pull-out + spin)
+| Item | Value |
+|---|---|
+| Product still | job e405a7a7-8850-4055-bf6d-d024ba04dc72 (gpt_image_2_6, 2k, high), 2.75 credits |
+| Turntable | job 29b99a53-e262-4d03-a6c3-903d89c67ef7, kling3_0 pro, 5 s, start_image only, 8.75 credits |
+| Delivered | 121 frames; desktop 1920x1080, phone 4:3.4 center crop |

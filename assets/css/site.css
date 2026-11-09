@@ -681,3 +681,19 @@ body.lb-open { overflow: hidden; }
   .tour-head { top: 64px; }
 }
 .tour-on .stage::after { background: linear-gradient(180deg, #070f2a8c 0%, transparent 18%, transparent 52%, #070f2ad0 100%), linear-gradient(90deg, #070f2a59, transparent 55%); }
+
+/* ---------- Walkthrough: item pull-out ---------- */
+.tour-canvas { transition: opacity .35s, filter .2s; filter: blur(calc(var(--dim, 0) * 10px)) brightness(calc(1 - var(--dim, 0) * .55)); }
+.tour-item { --pull: 1; --text: 0; position: absolute; inset: 0; z-index: 4; display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); align-items: center; gap: clamp(20px, 3vw, 56px); padding: calc(var(--header-h) + 24px) max(var(--gutter), env(safe-area-inset-right)) 90px max(var(--gutter), env(safe-area-inset-left)); opacity: 0; visibility: hidden; pointer-events: none; perspective: 1400px; }
+.item-media { position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: 28px; overflow: hidden; background: #0b1a44; box-shadow: 0 60px 120px -40px #000c, 0 0 0 1px #ffffff1f; transform-origin: 50% 70%; transform: translate3d(0, calc(var(--pull) * 18%), 0) scale(calc(1 - var(--pull) * .45)) rotateX(calc(var(--pull) * 22deg)) rotateY(calc(var(--pull) * -28deg)); will-change: transform; }
+.item-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.item-copy { color: #fff; opacity: var(--text); transform: translate3d(calc((1 - var(--text)) * 40px), 0, 0); text-shadow: 0 2px 20px #0008; }
+.item-copy .eyebrow { color: #ff9a86; }
+.item-copy h2 { font-size: clamp(44px, 5.4vw, 88px); line-height: .94; }
+.item-copy p:last-child { margin-top: 20px; font-size: clamp(16px, 1.3vw, 20px); line-height: 1.55; color: #dfe5f7; max-width: 36ch; }
+@media (max-width: 850px) {
+  .tour-item { grid-template-columns: 1fr; align-content: center; gap: 22px; padding-bottom: 110px; }
+  .item-media { border-radius: 20px; aspect-ratio: 4 / 3.4; }
+  .item-copy { transform: translate3d(0, calc((1 - var(--text)) * 24px), 0); }
+  .item-copy h2 { font-size: clamp(40px, 11vw, 56px); }
+}
