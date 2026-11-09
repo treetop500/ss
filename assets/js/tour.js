@@ -49,10 +49,10 @@
       segs.push({ ...s, frames: s.type === 'film' ? m.films[s.name] : s.type === 'item' ? m.spins[s.name] : 0 });
     }
     if (!segs.length || segs[0].type !== 'film') return;
-    start(segs);
+    start(segs, m.packExt || 'pack');
   });
 
-  function start(segs) {
+  function start(segs, packExt) {
     document.documentElement.classList.add('tour-on');
     $('#rooms').hidden = false;
     const n = segs.length;
@@ -132,7 +132,7 @@
         s = { imgs: [], urls: [], ctrl: new AbortController() };
         seqs.set(key, s);
         // One request per spin: [count][lengths...][webp bytes...]
-        fetch(`${BASE}${seg.name}/${tier === 'phone' ? 'p' : 'd'}.pack`, { signal: s.ctrl.signal })
+        fetch(`${BASE}${seg.name}/${tier === 'phone' ? 'p' : 'd'}.${packExt}`, { signal: s.ctrl.signal })
           .then(r => { if (!r.ok) throw Error('pack'); return r.arrayBuffer(); })
           .then(buf => {
             if (s.dead) return;
