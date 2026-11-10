@@ -10,18 +10,19 @@
   <link rel="apple-touch-icon" href="/assets/img/icon-180.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=JetBrains+Mono:wght@500;600&family=PT+Serif:wght@400;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/css/site.css">
   <link rel="stylesheet" href="/assets/css/jobsite.css">
   <link rel="stylesheet" href="/assets/css/pages.css">
+  <link rel="stylesheet" href="/assets/css/ultimate.css">
   <script>document.documentElement.classList.add('js')</script>
   <script src="/assets/js/site.js" defer></script>
 </head>
-<body>
+<body class="u-site">
   <a class="skip" href="#main">Skip to content</a>
 
   <!-- SHARED:CHROME-TOP -->
-  <header class="site-header" data-header>
+  <header class="site-header u-header" data-header>
     <div class="header-inner">
       <a class="brand" href="/" aria-label="M&amp;H HVAC home">
         <picture>
@@ -30,18 +31,15 @@
         </picture>
       </a>
       <nav class="nav" aria-label="Main">
+        <a href="/">Home</a>
         <a href="/#services">Services</a>
-        <a href="/#areas">Areas</a>
         <a href="/#work">Our work</a>
-        <a href="/#why">Meet Mo</a>
-        <a href="/#request">Contact</a>
+        <a href="/#areas">Service areas</a>
+        <a href="/#faq">FAQ</a>
       </nav>
       <div class="header-actions">
-        <a class="btn btn-ghost call-link" href="tel:+13479514761" data-tel>
-          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 3h3.5l1.8 4.6-2.3 1.5a12 12 0 0 0 6.9 6.9l1.5-2.3L21 15.5V19a2 2 0 0 1-2 2A17 17 0 0 1 3 5a2 2 0 0 1 2-2Z"/></svg>
-          <span data-phone>347-951-4761</span>
-        </a>
-        <a class="btn btn-primary" href="/#request">Book service</a>
+        <a class="btn btn-light u-pill" href="sms:+13479514761">Send us a text</a>
+        <a class="btn btn-primary u-pill" href="tel:+13479514761" data-tel>Call us</a>
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu" data-menu-toggle>
           <span class="sr-only">Menu</span><i></i><i></i>
         </button>
@@ -51,18 +49,15 @@
 
   <div class="menu" id="menu" data-menu hidden>
     <nav aria-label="Mobile">
-      <a class="menu-svc" href="/services/commercial-refrigeration/">Commercial refrigeration</a>
-      <a class="menu-svc" href="/services/mini-split-installation/">Mini splits &amp; AC</a>
-      <a class="menu-svc" href="/services/heating-repair/">Heating</a>
-      <a class="menu-svc" href="/services/ductwork/">Ductwork</a>
-      <a class="menu-svc" href="/services/emergency-hvac-repair/">24/7 emergency repair</a>
-      <a href="/#areas">Service areas</a>
+      <a href="/#services">Services</a>
+      <a href="/services/emergency-hvac-repair/">24/7 emergency</a>
       <a href="/#work">Our work</a>
-      <a href="/#why">Meet Mo</a>
+      <a href="/#areas">Service areas</a>
+      <a href="/#faq">FAQ</a>
     </nav>
     <div class="menu-cta">
       <a class="btn btn-primary btn-lg" href="tel:+13479514761" data-tel>Call <span data-phone>347-951-4761</span></a>
-      <a class="btn btn-outline btn-lg" href="/#request">Book service</a>
+      <a class="btn btn-light btn-lg" href="sms:+13479514761">Send us a text</a>
     </div>
   </div>
   <!-- /SHARED:CHROME-TOP -->
@@ -162,46 +157,52 @@
   </main>
 
   <!-- SHARED:CHROME-BOTTOM -->
-  <footer class="footer" id="site-footer">
-    <div class="wrap footer-grid">
-      <div class="footer-brand">
-        <img src="/assets/img/logo-360.png" alt="M&amp;H HVAC" width="160" height="78" loading="lazy">
-        <p>Heating, cooling &amp; refrigeration in New York City. Homes and businesses in all 5 boroughs and New Jersey.</p>
-      </div>
+  <footer class="footer u-footer" id="site-footer">
+    <div class="wrap u-foot-grid">
+      <nav aria-label="Company">
+        <p class="footer-h">Company</p>
+        <a href="/">Home</a><a href="/#about">About</a><a href="/#work">Our work</a><a href="/#faq">FAQ</a><a href="/#request">Book service</a>
+      </nav>
       <nav aria-label="Services">
         <p class="footer-h">Services</p>
+        <a href="/services/emergency-hvac-repair/">24/7 Emergency repair</a>
         <a href="/services/commercial-refrigeration/">Commercial refrigeration</a>
         <a href="/services/mini-split-installation/">Mini splits &amp; AC</a>
-        <a href="/services/heating-repair/">Heating</a>
+        <a href="/services/heating-repair/">Boilers &amp; heating</a>
+        <a href="/services/heating-repair/">Water heaters</a>
         <a href="/services/ductwork/">Ductwork</a>
-        <a href="/services/emergency-hvac-repair/">24/7 emergency repair</a>
       </nav>
       <nav aria-label="Service areas">
         <p class="footer-h">Service areas</p>
-        <a href="/service-areas/nyc/">NYC · all 5 boroughs</a>
-        <a href="/service-areas/new-jersey/">New Jersey</a>
+        <a href="/service-areas/nyc/">Brooklyn, NY</a><a href="/service-areas/nyc/">Queens, NY</a><a href="/service-areas/nyc/">Manhattan, NY</a><a href="/service-areas/nyc/">The Bronx, NY</a><a href="/service-areas/nyc/">Staten Island, NY</a><a href="/service-areas/new-jersey/">New Jersey</a>
       </nav>
-      <div class="footer-contact">
-        <p class="footer-h">Contact</p>
+      <div>
+        <p class="footer-h">Hours</p>
+        <p class="u-hours">Open 24/7 for emergencies</p>
+      </div>
+      <div class="u-contact-card">
+        <img src="/assets/img/logo-360.png" alt="" width="120" height="58" loading="lazy">
+        <strong>M&amp;H HVAC</strong>
         <a href="tel:+13479514761" data-tel><span data-phone>347-951-4761</span></a>
         <a href="tel:+13473205867" data-tel2><span data-phone2>347-320-5867</span></a>
         <a href="mailto:moe101221@gmail.com" data-mailto><span data-email>moe101221@gmail.com</span></a>
-        <p class="footer-247">Open 24/7 for emergencies</p>
-        <ul class="socials socials-footer" role="list">
+        <span>NYC &amp; New Jersey</span>
+        <a class="btn btn-light u-pill" href="/#request">Book now</a>
+      </div>
+    </div>
+    <div class="wrap u-foot-bottom">
+      <ul class="socials socials-footer" role="list">
             <li><a href="https://www.instagram.com/moehhvac" target="_blank" rel="noopener" data-social aria-label="M&amp;H HVAC on Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg><span>Instagram</span></a></li>
             <li><a href="https://www.tiktok.com/@moehvac1" target="_blank" rel="noopener" data-social aria-label="M&amp;H HVAC on TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.2 3c.4 2.3 1.8 3.8 4 4v3.3a7.6 7.6 0 0 1-4-1.2v6a5.9 5.9 0 1 1-5.9-5.9l.9.1v3.3a2.6 2.6 0 1 0 1.7 2.5V3h3.3Z"/></svg><span>TikTok</span></a></li>
             <li><a href="https://www.facebook.com/share/1CBwtJoaZR/" target="_blank" rel="noopener" data-social aria-label="M&amp;H HVAC on Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13.5 21v-7.5h2.6l.4-3.1h-3V8.5c0-.9.3-1.5 1.5-1.5h1.6V4.2c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.3H7.8v3.1h2.6V21h3.1Z"/></svg><span>Facebook</span></a></li>
           </ul>
-      </div>
+      <p>© <span data-year>2026</span> M&amp;H HVAC · All rights reserved</p>
     </div>
-    <p class="wrap fineprint">© <span data-year>2026</span> M&amp;H HVAC</p>
   </footer>
 
   <div class="action-bar" data-action-bar>
-    <a class="btn btn-outline" href="tel:+13479514761" data-tel>
-      <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 3h3.5l1.8 4.6-2.3 1.5a12 12 0 0 0 6.9 6.9l1.5-2.3L21 15.5V19a2 2 0 0 1-2 2A17 17 0 0 1 3 5a2 2 0 0 1 2-2Z"/></svg>Call
-    </a>
-    <a class="btn btn-primary" href="/#request">Book service</a>
+    <a class="btn btn-outline" href="sms:+13479514761"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4Z"/></svg>Text</a>
+    <a class="btn btn-primary" href="tel:+13479514761" data-tel><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 3h3.5l1.8 4.6-2.3 1.5a12 12 0 0 0 6.9 6.9l1.5-2.3L21 15.5V19a2 2 0 0 1-2 2A17 17 0 0 1 3 5a2 2 0 0 1 2-2Z"/></svg>Call now</a>
   </div>
   <!-- /SHARED:CHROME-BOTTOM -->
 </body>
