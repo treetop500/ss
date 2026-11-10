@@ -114,11 +114,20 @@ SERVICES = {
 }
 
 AREAS = {
-  'brooklyn': dict(name='Brooklyn', photo='7cc33594', note='Much of Brooklyn is brownstones, rowhouses and walk-ups without ductwork, which is why ductless mini splits with the condenser on a rear wall or the roof are so common here. Along the avenues, corner delis and markets depend on walk-ins and cases that can’t go down.'),
-  'queens': dict(name='Queens', photo='31f174af', note='Queens mixes detached and attached houses, many heated by a boiler in the basement, with long commercial strips of restaurants and markets that run walk-ins and deli cases.'),
-  'manhattan': dict(name='Manhattan', photo='80ff66cd', note='In Manhattan most jobs are in apartment, co-op and condo buildings or in storefronts below them. Roof and exterior work usually has to be scheduled with building management, so tell us who handles access.'),
-  'bronx': dict(name='The Bronx', photo='38e83700', note='Many Bronx apartment buildings are prewar, heated by a central boiler, and the bodegas and markets at street level rely on walk-ins and coolers running around the clock.'),
-  'staten-island': dict(name='Staten Island', photo='7725d18f', note='Staten Island has more single-family homes with yards and driveways, which usually leaves more room for outdoor units and ducted systems, plus the shopping strips and restaurants that need refrigeration.'),
+  'nyc': dict(
+    name='NYC', label='NYC · all 5 boroughs', where='New York City', state='NY', photo='7cc33594',
+    pill='24/7 emergency service · All 5 boroughs',
+    lede='Heating, cooling and commercial refrigeration for homes and businesses in Brooklyn, Queens, Manhattan, the Bronx and Staten Island.',
+    q='Do you cover my borough?',
+    answer='<p><strong>Yes, all five.</strong> Brooklyn, Queens, Manhattan, the Bronx and Staten Island are all part of our regular service area. Emergencies are handled 24/7; for installs, quotes and maintenance we set a time that works for you.</p>\n          <p>In apartment, co-op and condo buildings, roof and exterior work usually has to be scheduled with building management, so tell us who handles access when you call.</p>',
+  ),
+  'new-jersey': dict(
+    name='New Jersey', label='New Jersey', where='New Jersey', state='NJ', photo='31f174af',
+    pill='Heating · Cooling · Refrigeration',
+    lede='Heating, cooling and commercial refrigeration for homes and businesses in New Jersey.',
+    q='Do you come out to New Jersey?',
+    answer='<p><strong>Yes.</strong> We take jobs in New Jersey as well as NYC. Call with the address and what’s going on, and we’ll tell you when we can get there.</p>',
+  ),
 }
 
 STEPS = '''        <ol class="mini-steps">
@@ -171,7 +180,7 @@ def shots(items):
     return '\n'.join(f'          <figure class="shot">{media(s, a)}<figcaption>{c}</figcaption></figure>' for s, a, c in items)
 
 def area_chips(current=None):
-    return '\n'.join(f'          <li><a href="/service-areas/{k}/">{v["name"]}</a></li>' for k, v in AREAS.items() if k != current)
+    return '\n'.join(f'          <li><a href="/service-areas/{k}/">{v["label"]}</a></li>' for k, v in AREAS.items() if k != current)
 
 def service_covers(current=None):
     return '\n'.join(f'          <li><a href="/services/{k}/"><strong>{v["name"]}</strong><span>{v["lede"].split(".")[0]}.</span></a></li>' for k, v in SERVICES.items() if k != current)
@@ -266,28 +275,27 @@ for slug, s in SERVICES.items():
     write(f'services/{slug}', html)
 
 for slug, a in AREAS.items():
-    n = a['name']; nn = n.replace('The ', 'the ')
-    title = f'HVAC &amp; Refrigeration Repair in {n}, NY | M&amp;H HVAC'
+    n = a['where']; nn = n
+    title = f'HVAC &amp; Refrigeration Repair in {n} | M&amp;H HVAC'
     desc = f'Heating, cooling and commercial refrigeration repair in {n}. Mini splits, boilers, walk-in coolers and deli cases. 24/7 emergencies. Call 347-951-4761.'
     html = head(title, desc, f'service-areas/{slug}') + f'''    <section class="page-hero">
       <div class="wrap page-hero-grid">
         <div>
-          <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="/#areas">Service areas</a></li><li aria-current="page">{n}</li></ol>
-          <p class="pill"><span class="pulse" aria-hidden="true"></span>24/7 emergency service</p>
+          <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="/#areas">Service areas</a></li><li aria-current="page">{a['name']}</li></ol>
+          <p class="pill"><span class="pulse" aria-hidden="true"></span>{a['pill']}</p>
           <h1>HVAC &amp; refrigeration repair in <em>{n}.</em></h1>
-          <p class="lede">Heating, cooling and commercial refrigeration for homes and businesses in {nn}, plus the rest of New York City.</p>
+          <p class="lede">{a['lede']}</p>
           {cta_buttons('Repair')}
         </div>
-        <figure class="page-hero-photo"><img src="/assets/work/{a['photo']}.webp" alt="Outdoor units on an M&amp;H job in New York City" fetchpriority="high"><figcaption>M&amp;H job · New York City</figcaption></figure>
+        <figure class="page-hero-photo"><img src="/assets/work/{a['photo']}.webp" alt="Outdoor units on an M&amp;H job" fetchpriority="high"><figcaption>M&amp;H job</figcaption></figure>
       </div>
     </section>
 
     <section class="page-sec">
       <div class="wrap qa">
-        <h2>Do you come out to <em>{nn}?</em></h2>
+        <h2>{a['q']}</h2>
         <div class="answer">
-          <p><strong>Yes.</strong> {n} is part of our regular service area across all five boroughs. Emergencies are handled 24/7; for installs, quotes and maintenance we set a time that works for you.</p>
-          <p>{a['note']}</p>
+          {a['answer']}
           <p>Call <a href="tel:+13479514761" data-tel><span data-phone>347-951-4761</span></a> with the address and what’s going on.</p>
         </div>
       </div>
@@ -311,7 +319,7 @@ for slug, a in AREAS.items():
 
     <section class="page-sec">
       <div class="wrap">
-        <h2>Other <em>boroughs.</em></h2>
+        <h2>Other <em>areas.</em></h2>
         <ul class="chips" role="list">
 {area_chips(slug)}
         </ul>

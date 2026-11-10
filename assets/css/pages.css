@@ -263,3 +263,8 @@ body::after { content: none; }                       /* drop the grain */
 }
 @media (max-width: 1100px) { .svc-feature .svc-media { aspect-ratio: 4 / 3.4; } }
 @media (max-width: 650px) { .shots { grid-template-columns: 1fr; } .shot { aspect-ratio: 4 / 4.6; } .help-art { aspect-ratio: 4 / 4.6; } }
+.area-list-2 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+.area-list-2 a { min-height: 220px; padding: 28px; }
+.area-list-2 strong { font-size: clamp(36px, 4vw, 64px); }
+.area-list-2 small { font-size: 13px; }
+@media (max-width: 650px) { .area-list-2 { grid-template-columns: 1fr !important; } .area-list-2 a { min-height: 150px; } }
