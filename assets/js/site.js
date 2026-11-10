@@ -13,7 +13,7 @@ const SITE = {
   phone2E164: '+13473205867',
   email: 'moe101221@gmail.com',
   hours: '24/7',
-  area: 'NYC (all 5 boroughs) & New Jersey',
+  area: 'NYC (all 5 boroughs), Long Island & New Jersey',
   formEndpoint: '',
   // Follower counts shown on the social cards, e.g. '12.4K'. Empty shows the platform name.
   followers: { instagram: '5.9K', tiktok: '5.6K', facebook: '15K' }

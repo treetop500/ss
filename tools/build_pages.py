@@ -121,6 +121,13 @@ AREAS = {
     q='Do you cover my borough?',
     answer='<p><strong>Yes, all five.</strong> Brooklyn, Queens, Manhattan, the Bronx and Staten Island are all part of our regular service area. Emergencies are handled 24/7; for installs, quotes and maintenance we set a time that works for you.</p>\n          <p>In apartment, co-op and condo buildings, roof and exterior work usually has to be scheduled with building management, so tell us who handles access when you call.</p>',
   ),
+  'long-island': dict(
+    name='Long Island', label='Long Island', where='Long Island', state='NY', photo='38e83700',
+    pill='24/7 emergency service · Nassau &amp; Suffolk',
+    lede='Heating, cooling and commercial refrigeration for homes and businesses on Long Island.',
+    q='Do you come out to Long Island?',
+    answer='<p><strong>Yes.</strong> We take jobs on Long Island as well as in the five boroughs and New Jersey. Call with the address and what’s going on, and we’ll tell you when we can get there.</p>',
+  ),
   'new-jersey': dict(
     name='New Jersey', label='New Jersey', where='New Jersey', state='NJ', photo='31f174af',
     pill='Heating · Cooling · Refrigeration',
