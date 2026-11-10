@@ -152,13 +152,14 @@ def head(title, desc, path):
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>{title}</title>
   <meta name="description" content="{desc}">
-  <meta name="theme-color" content="#0b1640">
+  <meta name="theme-color" content="#0d0e11">
   <link rel="icon" href="/assets/img/icon-32.png" sizes="32x32">
   <link rel="apple-touch-icon" href="/assets/img/icon-180.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Rubik:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Rubik:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/css/mh.css">
+  <link rel="stylesheet" href="/assets/css/dark.css">
   <script>document.documentElement.classList.add('js')</script>
   <script src="/assets/js/site.js" defer></script>
 </head>
