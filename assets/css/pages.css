@@ -200,3 +200,66 @@
 .credits { margin-top: 16px; font-size: 12.5px; line-height: 1.5; color: var(--muted); max-width: 90ch; }
 .credits a { color: var(--muted); text-underline-offset: 2px; }
 @media (prefers-reduced-motion: reduce) { .page-hero-bg { display: none; } }
+
+/* =========================================================
+   Polish: easier on the eye, still loud.
+   Fewer lines and labels, softer surfaces, bigger media,
+   bigger type where it counts.
+   ========================================================= */
+:root { --line: #23272e; --muted: #aeb3bd; --white: #171a1f; --paper: #121418; }
+body { font-size: 18px; }
+body::after { content: none; }                       /* drop the grain */
+.body-lg, .hero-lede, .page-hero .lede, .qa .answer, .reasons span, .svc-body small, .steps-4 p { color: #d3d6dc; }
+.section { padding-block: clamp(96px, 12vw, 180px); }
+.section-head { margin-bottom: clamp(44px, 5vw, 80px); }
+.eyebrow { font-size: 13px; }
+.eyebrow::before { width: 28px; height: 3px; }
+
+/* Big, simple cards with tall media */
+.svc, .help-card, .card, .area-list a, .covers li, .form, .w, .shot, .page-hero-photo, .item-media { border-radius: 16px; }
+.svc { border-color: transparent; background: var(--white); }
+.svc:hover { border-color: var(--red); }
+.svc-media { aspect-ratio: 4 / 5; }
+.svc-feature .svc-media { aspect-ratio: auto; }
+.svc-body { gap: 10px; padding: 24px 24px 28px; }
+.svc-body strong { font-size: clamp(32px, 2.8vw, 44px); }
+.svc-body ul { display: none; }                      /* tags were clutter */
+.svc-body b { font-family: var(--sans); font-size: 15px; font-weight: 800; letter-spacing: .02em; }
+.svc-media video { object-position: 50% 40%; }
+.help-card { border-color: transparent; }
+.help-art { aspect-ratio: 4 / 4.2; }
+.help-text strong { font-size: clamp(28px, 2.4vw, 36px); }
+.area-list a { border-color: transparent; min-height: 170px; }
+.covers li { border-color: transparent; }
+.chip, .hero-services a, .chips a { border-radius: 999px; }
+
+/* Bigger photos on the service and area pages */
+.page-hero-photo { aspect-ratio: 4 / 5; box-shadow: 16px 16px 0 var(--red); }
+.page-hero-photo video, .page-hero-photo img { object-position: 50% 40%; }
+.shots { gap: 16px; }
+.shot { aspect-ratio: 3 / 4; }
+.shot video, .shot img { object-position: 50% 40%; }
+
+/* Louder calls to action */
+.btn-lg { min-height: 58px; padding: 16px 28px; font-size: 16px; }
+.hero h1 { font-size: clamp(58px, 7vw, 120px); }
+.page-hero h1 { font-size: clamp(50px, 6.6vw, 108px); }
+.section-head h2, .help h2, .request h2, .why h2 { font-size: clamp(60px, 9.5vw, 160px); }
+
+/* Quieter gallery captions */
+.w figcaption { font-family: var(--sans); text-transform: none; font-size: 14px; letter-spacing: 0; }
+.w figcaption::before { content: none; }
+
+@media (max-width: 850px) {
+  body { font-size: 17px; }
+  .page-hero-photo { aspect-ratio: 4 / 4.4; box-shadow: 10px 10px 0 var(--red); }
+  .hero h1 { font-size: clamp(36px, 10.2vw, 60px); }
+  .page-hero h1 { font-size: clamp(42px, 12vw, 64px); }
+  .section-head h2, .help h2, .request h2, .why h2 { font-size: clamp(54px, 15vw, 84px); }
+  .svc-media { aspect-ratio: 4 / 4.4; }
+  .help-art { aspect-ratio: 1 / 1; }
+  .help-text strong { font-size: 20px; }
+  .btn-lg { min-height: 54px; padding: 14px 20px; }
+}
+@media (max-width: 1100px) { .svc-feature .svc-media { aspect-ratio: 4 / 3.4; } }
+@media (max-width: 650px) { .shots { grid-template-columns: 1fr; } .shot { aspect-ratio: 4 / 4.6; } .help-art { aspect-ratio: 4 / 4.6; } }
