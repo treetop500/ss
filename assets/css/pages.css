@@ -189,3 +189,14 @@
   .hero-copy { gap: 12px; padding-top: 14px; }
   .hero-lede { font-size: 15px; line-height: 1.45; }
 }
+.svc-media video { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* background video header + video shots + photo credits */
+.page-hero--video { overflow: hidden; }
+.page-hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .38; filter: saturate(.85); }
+.page-hero--video::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, #07080af2 0%, #07080acc 45%, #07080a80 100%); pointer-events: none; }
+.page-hero--video .wrap { position: relative; z-index: 1; }
+.page-hero-photo video, .shot video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.credits { margin-top: 16px; font-size: 12.5px; line-height: 1.5; color: var(--muted); max-width: 90ch; }
+.credits a { color: var(--muted); text-underline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .page-hero-bg { display: none; } }

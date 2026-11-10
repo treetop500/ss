@@ -57,7 +57,9 @@ SERVICES = {
     desc='Boiler repair, water heater installation and gas and electric heater service in all 5 NYC boroughs. 24/7 for no-heat emergencies. Call 347-951-4761.',
     h1='Boiler &amp; heating repair in <em>New York City.</em>',
     lede='Boilers, water heaters and gas and electric heaters for homes and businesses. No heat in the middle of winter is an emergency: call any hour.',
-    photo=('/assets/art/boiler.webp', 'Illustration of a gas boiler with its piping and expansion tank', 'Illustration · job photos coming soon'),
+    bgvideo=('/assets/media/water-heater-1.mp4', '/assets/media/water-heater-1.webp'),
+    photo=('/assets/media/water-heater-2.mp4', 'Mo’s crew swapping a gas water heater in a basement', 'M&amp;H job · water heater swap'),
+    credits='Example photos, not M&amp;H jobs: <a href="https://commons.wikimedia.org/wiki/File:ModCon_boiler_system.jpg" target="_blank" rel="noopener">“ModCon boiler system”</a> by Audetat, <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a>; <a href="https://commons.wikimedia.org/wiki/File:Hydronic_Unit_Heater.jpg" target="_blank" rel="noopener">“Hydronic Unit Heater”</a> by SAF1999, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>, via Wikimedia Commons. Resized.',
     q='The heat’s out. What should I check before calling?',
     a='''<p class="callout"><strong>If you smell gas, leave the building and call 911 from outside.</strong> Don’t flip switches or try to relight anything.</p>
           <p>Otherwise, a few quick checks:</p>
@@ -68,7 +70,7 @@ SERVICES = {
           </ol>
           <p>Still nothing? Call. We find the cause on site, whether that’s the boiler, a pump, a valve or the controls, and give you the price before we fix it.</p>''',
     covers=[('Boilers', 'No heat, short cycling, leaks, pressure problems.'), ('Water heaters', 'Tank and tankless, repair and replacement.'), ('Gas &amp; electric heaters', 'Unit heaters for shops, garages and basements; electric heat.')],
-    shots=[('/assets/art/boiler.webp', 'Illustration of a boiler', 'Illustration · boiler'), ('/assets/art/water-heater.webp', 'Illustration of a tank and a tankless water heater', 'Illustration · water heaters'), ('/assets/art/unit-heater.webp', 'Illustration of a hanging gas unit heater and electric baseboard', 'Illustration · heaters')],
+    shots=[('/assets/media/water-heater-1.mp4', 'Mo’s crew installing a new gas water heater', 'M&amp;H job · water heater install'), ('/assets/stock/boiler-modcon-sm.webp', 'Basement boiler with copper piping, pumps and expansion tank', 'Example boiler · not an M&amp;H job'), ('/assets/stock/unit-heater-sm.webp', 'Ceiling-hung unit heater', 'Example unit heater · not an M&amp;H job')],
   ),
   'ductwork': dict(
     name='Ductwork', form='Quote',
@@ -76,7 +78,7 @@ SERVICES = {
     desc='New duct runs, duct repair and sealing for NYC homes and commercial buildouts. Fix rooms that never get enough air. Call 347-951-4761.',
     h1='Ductwork installation &amp; repair in <em>New York City.</em>',
     lede='New runs for buildouts and renovations, and repairs for systems where some rooms never get enough air.',
-    photo=('/assets/work/ductwork.webp', 'Insulated duct sections ready to go in on an M&amp;H buildout', 'M&amp;H job · duct sections on a buildout'),
+    photo=('/assets/work/duct-2.webp', 'Mo walking a store buildout under new exposed ductwork with supply registers', 'M&amp;H job · ductwork, store buildout'),
     q='Why is one room always hotter or colder than the rest?',
     a='''<p><strong>Usually it’s airflow, not the equipment.</strong> The common causes:</p>
           <ul>
@@ -87,7 +89,7 @@ SERVICES = {
           </ul>
           <p>We trace the run to that room, then seal, repair, resize or add a run, and give you the price before we start.</p>''',
     covers=[('New duct runs', 'Buildouts, renovations, new equipment.'), ('Repairs &amp; sealing', 'Leaks, disconnects, crushed flex.'), ('Airflow problems', 'Rooms that never get air.')],
-    shots=[('/assets/media/ductwork.webp', 'Duct work in progress on a buildout', 'Ductwork going in'), ('/assets/work/c01c44b5-sm.webp', 'Exposed duct over a market buildout', 'Exposed duct · market'), ('/assets/work/95e54657-sm.webp', 'Open ceiling with ducts and a ceiling cassette', 'Open ceiling · retail')],
+    shots=[('/assets/work/duct-1-sm.webp', 'New rectangular duct with supply registers along a store ceiling', 'Exposed duct &amp; registers'), ('/assets/work/ductwork-sm.webp', 'Insulated duct sections ready to go in', 'Duct sections · buildout'), ('/assets/media/ductwork.mp4', 'Ductwork going in on a buildout', 'Ductwork going in')],
   ),
   'emergency-hvac-repair': dict(
     name='24/7 emergency repair', form='Repair',
@@ -160,8 +162,13 @@ def cta_buttons(form):
           <a class="btn btn-outline btn-lg" href="/?service={form.replace(' ', '+')}#request">Book service</a>
         </div>'''
 
+def media(src, alt, attrs='loading="lazy"'):
+    if src.endswith('.mp4'):
+        return f'<video src="{src}" poster="{src[:-4]}.webp" muted loop playsinline autoplay preload="metadata" aria-label="{alt}"></video>'
+    return f'<img src="{src}" alt="{alt}" {attrs}>'
+
 def shots(items):
-    return '\n'.join(f'          <figure class="shot"><img src="{s}" alt="{a}" loading="lazy"><figcaption>{c}</figcaption></figure>' for s, a, c in items)
+    return '\n'.join(f'          <figure class="shot">{media(s, a)}<figcaption>{c}</figcaption></figure>' for s, a, c in items)
 
 def area_chips(current=None):
     return '\n'.join(f'          <li><a href="/service-areas/{k}/">{v["name"]}</a></li>' for k, v in AREAS.items() if k != current)
@@ -196,7 +203,10 @@ def write(path, html):
 for slug, s in SERVICES.items():
     src, alt, cap = s['photo']
     covers = '\n'.join(f'          <li><strong>{t}</strong><span>{d}</span></li>' for t, d in s['covers'])
-    html = head(s['title'], s['desc'], f'services/{slug}') + f'''    <section class="page-hero">
+    bg = s.get('bgvideo')
+    bg_html = f'\n      <video class="page-hero-bg" src="{bg[0]}" poster="{bg[1]}" muted loop playsinline autoplay preload="metadata" aria-hidden="true"></video>' if bg else ''
+    credits = f'\n        <p class="credits">{s["credits"]}</p>' if s.get('credits') else ''
+    html = head(s['title'], s['desc'], f'services/{slug}') + f'''    <section class="page-hero{' page-hero--video' if bg else ''}">{bg_html}
       <div class="wrap page-hero-grid">
         <div>
           <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="/#services">Services</a></li><li aria-current="page">{s['name']}</li></ol>
@@ -205,7 +215,7 @@ for slug, s in SERVICES.items():
           <p class="lede">{s['lede']}</p>
           {cta_buttons(s['form'])}
         </div>
-        <figure class="page-hero-photo"><img src="{src}" alt="{alt}" fetchpriority="high"><figcaption>{cap}</figcaption></figure>
+        <figure class="page-hero-photo">{media(src, alt, 'fetchpriority="high"')}<figcaption>{cap}</figcaption></figure>
       </div>
     </section>
 
@@ -232,7 +242,7 @@ for slug, s in SERVICES.items():
         <h2>Real <em>work.</em></h2>
         <div class="shots">
 {shots(s['shots'])}
-        </div>
+        </div>{credits}
       </div>
     </section>
 
