@@ -1,0 +1,312 @@
+"""Build the service and service-area pages.
+
+Shared header/menu/footer/action bar are copied from index.html (between the
+SHARED:CHROME markers), so the whole site stays consistent.
+
+    python3 tools/build_pages.py
+"""
+import os, re
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+index = open(os.path.join(ROOT, 'index.html')).read()
+TOP = re.search(r'  <!-- SHARED:CHROME-TOP -->.*?<!-- /SHARED:CHROME-TOP -->', index, re.S).group(0)
+BOTTOM = re.search(r'  <!-- SHARED:CHROME-BOTTOM -->.*?<!-- /SHARED:CHROME-BOTTOM -->', index, re.S).group(0)
+PHONE = '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 3h3.5l1.8 4.6-2.3 1.5a12 12 0 0 0 6.9 6.9l1.5-2.3L21 15.5V19a2 2 0 0 1-2 2A17 17 0 0 1 3 5a2 2 0 0 1 2-2Z"/></svg>'
+
+SERVICES = {
+  'commercial-refrigeration': dict(
+    name='Commercial refrigeration', form='Refrigeration',
+    title='Commercial Refrigeration Repair in NYC | Walk-in Coolers &amp; Deli Cases | M&amp;H HVAC',
+    desc='Walk-in cooler, walk-in freezer, deli case and commercial fridge repair and installation in all 5 NYC boroughs. 24/7 for emergencies. Call 347-951-4761.',
+    h1='Commercial refrigeration repair in <em>New York City.</em>',
+    lede='Walk-in coolers, walk-in freezers, deli cases, open cases and glass-door fridges for delis, markets and restaurants. When a box goes warm, call any hour.',
+    photo=('/assets/work/7ee8f78b.webp', 'Two condensing units M&amp;H installed, labelled for a deli case and a walk-in box', 'M&amp;H job · units for a deli case and walk-in'),
+    q='My walk-in isn’t holding temperature. What should I do until you get here?',
+    a='''<p><strong>Call us first</strong>, then do what you can to slow the warm-up:</p>
+          <ol>
+            <li>Keep the door shut and make sure it closes all the way and the gasket seals.</li>
+            <li>Check that nothing is blocking the fan inside the box, and the breaker for the unit hasn’t tripped.</li>
+            <li>Note the temperature on the display so we know how fast it’s rising.</li>
+            <li>If another cooler is holding, move the most sensitive product into it.</li>
+          </ol>
+          <p>On site we check the condensing unit outside, the evaporator and defrost inside, and the door, then tell you what failed and what it takes to fix.</p>''',
+    covers=[('Walk-in coolers', 'Boxes, doors, evaporators and the condensing units that run them.'), ('Walk-in freezers', 'Low-temp boxes, defrost problems, iced-up coils.'), ('Deli cases', 'Service and display cases that have to hold temp all day.'), ('Open cases', 'Open-front grab-and-go cases and their units.'), ('Glass-door fridges', 'Reach-in coolers and full runs of cooler doors.')],
+    shots=[('/assets/work/fd72f06d-sm.webp', 'Curved glass deli case M&amp;H installed', 'Deli case install'), ('/assets/work/c01c44b5-sm.webp', 'A full run of glass-door fridges in a market buildout', 'Glass-door fridges · market'), ('/assets/work/80ff66cd-sm.webp', 'Row of refrigeration units on a rooftop', 'Refrigeration units · rooftop'), ('/assets/work/f8306ac4-sm.webp', 'Condensing units mounted on a wall for open cases', 'Units for open cases'), ('/assets/work/2298e119-sm.webp', 'Refrigeration unit mounted on a brick wall', 'Wall-mounted unit'), ('/assets/work/81988476-sm.webp', 'Deli service cases on a store floor', 'Deli service cases')],
+  ),
+  'mini-split-installation': dict(
+    name='Mini splits &amp; AC', form='New install',
+    title='Mini Split Installation &amp; AC Repair in NYC | M&amp;H HVAC',
+    desc='Ductless mini split installation and AC repair for NYC apartments, homes and storefronts. Wall units, ceiling cassettes, outdoor condensers. Call 347-951-4761.',
+    h1='Mini split installation &amp; AC repair in <em>New York City.</em>',
+    lede='Ductless cooling, and heat with heat-pump models, for apartments, brownstones, shops and restaurants. Wall units, ceiling cassettes and the condensers outside.',
+    photo=('/assets/work/4bde5bf9.webp', 'Two wall-mounted mini splits M&amp;H installed in a retail store', 'M&amp;H job · two wall units, retail store'),
+    q='Can I get real AC in my apartment or storefront without ductwork?',
+    a='''<p><strong>Yes. That’s what a mini split is for.</strong> An indoor unit on the wall or in the ceiling connects to an outdoor condenser through a small line set, so there’s no ductwork to run.</p>
+          <ul>
+            <li><strong>Indoor:</strong> a wall unit for a room, or a ceiling cassette for an open store floor.</li>
+            <li><strong>Outdoor:</strong> the condenser goes on a wall bracket, a roof stand or the yard, wherever the building allows.</li>
+            <li><strong>Heat too:</strong> heat-pump models also heat in winter.</li>
+          </ul>
+          <p class="callout">In many NYC buildings the landlord, co-op or management has to approve outside equipment. Check that early; we can tell you what the install needs.</p>''',
+    covers=[('Wall units', 'Single rooms, bedrooms, offices.'), ('Ceiling cassettes', 'Open retail and restaurant floors.'), ('Outdoor condensers', 'Wall brackets, rooftop stands, stacked installs.'), ('AC repair', 'Not cooling, leaking or icing up.')],
+    shots=[('/assets/work/1106fd8f-sm.webp', 'Mini split above a bedroom window', 'Mini split · home'), ('/assets/work/3181999e-sm.webp', 'Ceiling cassette being installed in a retail store', 'Ceiling cassette · retail'), ('/assets/work/7cc33594-sm.webp', 'Two mini split condensers mounted on a brick wall', 'Condensers · wall-mounted'), ('/assets/work/31f174af-sm.webp', 'Two mini split condensers on a roof', 'Condensers · rooftop'), ('/assets/work/f5b5ffdf-sm.webp', 'Wall unit installed in a restaurant', 'Wall unit · restaurant'), ('/assets/work/1945f345-sm.webp', 'Mini split in a bedroom', 'Mini split · bedroom')],
+  ),
+  'heating-repair': dict(
+    name='Heating', form='Repair',
+    title='Boiler, Water Heater &amp; Heating Repair in NYC | M&amp;H HVAC',
+    desc='Boiler repair, water heater installation and gas and electric heater service in all 5 NYC boroughs. 24/7 for no-heat emergencies. Call 347-951-4761.',
+    h1='Boiler &amp; heating repair in <em>New York City.</em>',
+    lede='Boilers, water heaters and gas and electric heaters for homes and businesses. No heat in the middle of winter is an emergency: call any hour.',
+    photo=('/assets/art/boiler.webp', 'Illustration of a gas boiler with its piping and expansion tank', 'Illustration · job photos coming soon'),
+    q='The heat’s out. What should I check before calling?',
+    a='''<p class="callout"><strong>If you smell gas, leave the building and call 911 from outside.</strong> Don’t flip switches or try to relight anything.</p>
+          <p>Otherwise, a few quick checks:</p>
+          <ol>
+            <li>The thermostat is set to heat and above the room temperature, and its batteries aren’t dead.</li>
+            <li>The boiler’s or heater’s power switch is on, and the breaker hasn’t tripped.</li>
+            <li>For hot water, check whether the water heater’s pilot or display shows an error.</li>
+          </ol>
+          <p>Still nothing? Call. We find the cause on site, whether that’s the boiler, a pump, a valve or the controls, and give you the price before we fix it.</p>''',
+    covers=[('Boilers', 'No heat, short cycling, leaks, pressure problems.'), ('Water heaters', 'Tank and tankless, repair and replacement.'), ('Gas &amp; electric heaters', 'Unit heaters for shops, garages and basements; electric heat.')],
+    shots=[('/assets/art/boiler.webp', 'Illustration of a boiler', 'Illustration · boiler'), ('/assets/art/water-heater.webp', 'Illustration of a tank and a tankless water heater', 'Illustration · water heaters'), ('/assets/art/unit-heater.webp', 'Illustration of a hanging gas unit heater and electric baseboard', 'Illustration · heaters')],
+  ),
+  'ductwork': dict(
+    name='Ductwork', form='Quote',
+    title='Ductwork Installation &amp; Repair in NYC | M&amp;H HVAC',
+    desc='New duct runs, duct repair and sealing for NYC homes and commercial buildouts. Fix rooms that never get enough air. Call 347-951-4761.',
+    h1='Ductwork installation &amp; repair in <em>New York City.</em>',
+    lede='New runs for buildouts and renovations, and repairs for systems where some rooms never get enough air.',
+    photo=('/assets/work/ductwork.webp', 'Insulated duct sections ready to go in on an M&amp;H buildout', 'M&amp;H job · duct sections on a buildout'),
+    q='Why is one room always hotter or colder than the rest?',
+    a='''<p><strong>Usually it’s airflow, not the equipment.</strong> The common causes:</p>
+          <ul>
+            <li>A duct that’s undersized, crushed or disconnected somewhere you can’t see.</li>
+            <li>Leaky joints losing air before it reaches the room.</li>
+            <li>Registers that are closed or blocked by furniture.</li>
+            <li>A dirty filter starving the whole system.</li>
+          </ul>
+          <p>We trace the run to that room, then seal, repair, resize or add a run, and give you the price before we start.</p>''',
+    covers=[('New duct runs', 'Buildouts, renovations, new equipment.'), ('Repairs &amp; sealing', 'Leaks, disconnects, crushed flex.'), ('Airflow problems', 'Rooms that never get air.')],
+    shots=[('/assets/media/ductwork.webp', 'Duct work in progress on a buildout', 'Ductwork going in'), ('/assets/work/c01c44b5-sm.webp', 'Exposed duct over a market buildout', 'Exposed duct · market'), ('/assets/work/95e54657-sm.webp', 'Open ceiling with ducts and a ceiling cassette', 'Open ceiling · retail')],
+  ),
+  'emergency-hvac-repair': dict(
+    name='24/7 emergency repair', form='Repair',
+    title='24/7 Emergency HVAC &amp; Refrigeration Repair in NYC | M&amp;H HVAC',
+    desc='24/7 emergency repair in all 5 NYC boroughs: no heat, no cooling, walk-in or freezer going warm. Call 347-951-4761 any hour.',
+    h1='24/7 emergency HVAC repair in <em>New York City.</em>',
+    lede='No heat, no cooling, or a walk-in going warm with product inside. Call 347-951-4761, any hour.',
+    photo=('/assets/work/6cc25122.webp', 'Mo charging an outdoor unit on a snow-covered roof', 'M&amp;H job · winter service call'),
+    q='Is this an emergency, or can it wait until morning?',
+    a='''<p><strong>Call now if:</strong></p>
+          <ul>
+            <li>There’s no heat and it’s cold out, especially with kids, older people or pipes at risk.</li>
+            <li>A walk-in, freezer or case is going warm with product inside.</li>
+            <li>Water is leaking from a unit, or there’s a burning smell from equipment.</li>
+            <li>A business can’t open because the space is too hot or too cold.</li>
+          </ul>
+          <p class="callout"><strong>If you smell gas, leave and call 911 first.</strong></p>
+          <p>Not sure? Call anyway and describe it. We’ll tell you if it can wait.</p>''',
+    covers=[('Heating', 'No heat, no hot water.'), ('Cooling', 'No AC, leaking or iced units.'), ('Refrigeration', 'Walk-ins, freezers and cases going warm.')],
+    shots=[('/assets/work/80ff66cd-sm.webp', 'Refrigeration units on a rooftop', 'Refrigeration · rooftop'), ('/assets/work/7ee8f78b-sm.webp', 'Condensing units for a deli case and walk-in', 'Deli case &amp; walk-in units'), ('/assets/work/38e83700-sm.webp', 'Mini split condenser on a roof', 'Condenser · rooftop')],
+  ),
+}
+
+AREAS = {
+  'brooklyn': dict(name='Brooklyn', photo='7cc33594', note='Much of Brooklyn is brownstones, rowhouses and walk-ups without ductwork, which is why ductless mini splits with the condenser on a rear wall or the roof are so common here. Along the avenues, corner delis and markets depend on walk-ins and cases that can’t go down.'),
+  'queens': dict(name='Queens', photo='31f174af', note='Queens mixes detached and attached houses, many heated by a boiler in the basement, with long commercial strips of restaurants and markets that run walk-ins and deli cases.'),
+  'manhattan': dict(name='Manhattan', photo='80ff66cd', note='In Manhattan most jobs are in apartment, co-op and condo buildings or in storefronts below them. Roof and exterior work usually has to be scheduled with building management, so tell us who handles access.'),
+  'bronx': dict(name='The Bronx', photo='38e83700', note='Many Bronx apartment buildings are prewar, heated by a central boiler, and the bodegas and markets at street level rely on walk-ins and coolers running around the clock.'),
+  'staten-island': dict(name='Staten Island', photo='7725d18f', note='Staten Island has more single-family homes with yards and driveways, which usually leaves more room for outdoor units and ducted systems, plus the shopping strips and restaurants that need refrigeration.'),
+}
+
+STEPS = '''        <ol class="mini-steps">
+          <li><strong>You call or send a request</strong>Address, what’s going on, when we can get in.</li>
+          <li><strong>We find the cause</strong>A tech checks the equipment on site and explains it plainly.</li>
+          <li><strong>You approve the price</strong>Before the work starts.</li>
+          <li><strong>Fixed or scheduled</strong>Small repairs often the same visit; installs get a date.</li>
+        </ol>'''
+
+def head(title, desc, path):
+    return f'''<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>{title}</title>
+  <meta name="description" content="{desc}">
+  <meta name="theme-color" content="#0d0e11">
+  <link rel="icon" href="/assets/img/icon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/assets/img/icon-180.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/site.css">
+  <link rel="stylesheet" href="/assets/css/jobsite.css">
+  <link rel="stylesheet" href="/assets/css/pages.css">
+  <script>document.documentElement.classList.add('js')</script>
+  <script src="/assets/js/site.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+{TOP}
+
+  <main id="main">
+'''
+
+def cta_buttons(form):
+    return f'''<div class="hero-cta">
+          <a class="btn btn-primary btn-lg" href="tel:+13479514761" data-tel>{PHONE}Call <span data-phone>347-951-4761</span></a>
+          <a class="btn btn-outline btn-lg" href="/?service={form.replace(' ', '+')}#request">Book service</a>
+        </div>'''
+
+def shots(items):
+    return '\n'.join(f'          <figure class="shot"><img src="{s}" alt="{a}" loading="lazy"><figcaption>{c}</figcaption></figure>' for s, a, c in items)
+
+def area_chips(current=None):
+    return '\n'.join(f'          <li><a href="/service-areas/{k}/">{v["name"]}</a></li>' for k, v in AREAS.items() if k != current)
+
+def service_covers(current=None):
+    return '\n'.join(f'          <li><a href="/services/{k}/"><strong>{v["name"]}</strong><span>{v["lede"].split(".")[0]}.</span></a></li>' for k, v in SERVICES.items() if k != current)
+
+def page_end(form, heading):
+    return f'''    <section class="page-cta">
+      <div class="wrap">
+        <h2>{heading}</h2>
+        <p>Emergencies: call any hour. Everything else: call or send a request and we’ll set a time.</p>
+        <div class="hero-cta">
+          <a class="btn btn-light btn-lg" href="tel:+13479514761" data-tel>{PHONE}Call <span data-phone>347-951-4761</span></a>
+          <a class="btn btn-outline btn-lg" href="/?service={form.replace(' ', '+')}#request">Send a request</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+{BOTTOM}
+</body>
+</html>
+'''
+
+def write(path, html):
+    full = os.path.join(ROOT, path, 'index.html')
+    os.makedirs(os.path.dirname(full), exist_ok=True)
+    open(full, 'w').write(html)
+    print('wrote', '/' + path + '/')
+
+for slug, s in SERVICES.items():
+    src, alt, cap = s['photo']
+    covers = '\n'.join(f'          <li><strong>{t}</strong><span>{d}</span></li>' for t, d in s['covers'])
+    html = head(s['title'], s['desc'], f'services/{slug}') + f'''    <section class="page-hero">
+      <div class="wrap page-hero-grid">
+        <div>
+          <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="/#services">Services</a></li><li aria-current="page">{s['name']}</li></ol>
+          <p class="pill"><span class="pulse" aria-hidden="true"></span>24/7 emergency service · All 5 boroughs</p>
+          <h1>{s['h1']}</h1>
+          <p class="lede">{s['lede']}</p>
+          {cta_buttons(s['form'])}
+        </div>
+        <figure class="page-hero-photo"><img src="{src}" alt="{alt}" fetchpriority="high"><figcaption>{cap}</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="page-sec">
+      <div class="wrap qa">
+        <h2>{s['q']}</h2>
+        <div class="answer">
+          {s['a']}
+        </div>
+      </div>
+    </section>
+
+    <section class="page-sec">
+      <div class="wrap">
+        <h2>What we <em>cover.</em></h2>
+        <ul class="covers" role="list">
+{covers}
+        </ul>
+      </div>
+    </section>
+
+    <section class="page-sec">
+      <div class="wrap">
+        <h2>Real <em>work.</em></h2>
+        <div class="shots">
+{shots(s['shots'])}
+        </div>
+      </div>
+    </section>
+
+    <section class="page-sec">
+      <div class="wrap">
+        <h2>After you <em>call.</em></h2>
+{STEPS}
+      </div>
+    </section>
+
+    <section class="page-sec">
+      <div class="wrap">
+        <h2>Where we <em>work.</em></h2>
+        <ul class="chips" role="list">
+{area_chips()}
+        </ul>
+      </div>
+    </section>
+
+''' + page_end(s['form'], f"Need {s['name'].lower().replace('24/7 ', '')}? <em>Call Mo.</em>")
+    write(f'services/{slug}', html)
+
+for slug, a in AREAS.items():
+    n = a['name']; nn = n.replace('The ', 'the ')
+    title = f'HVAC &amp; Refrigeration Repair in {n}, NY | M&amp;H HVAC'
+    desc = f'Heating, cooling and commercial refrigeration repair in {n}. Mini splits, boilers, walk-in coolers and deli cases. 24/7 emergencies. Call 347-951-4761.'
+    html = head(title, desc, f'service-areas/{slug}') + f'''    <section class="page-hero">
+      <div class="wrap page-hero-grid">
+        <div>
+          <ol class="crumbs"><li><a href="/">Home</a></li><li><a href="/#areas">Service areas</a></li><li aria-current="page">{n}</li></ol>
+          <p class="pill"><span class="pulse" aria-hidden="true"></span>24/7 emergency service</p>
+          <h1>HVAC &amp; refrigeration repair in <em>{n}.</em></h1>
+          <p class="lede">Heating, cooling and commercial refrigeration for homes and businesses in {nn}, plus the rest of New York City.</p>
+          {cta_buttons('Repair')}
+        </div>
+        <figure class="page-hero-photo"><img src="/assets/work/{a['photo']}.webp" alt="Outdoor units on an M&amp;H job in New York City" fetchpriority="high"><figcaption>M&amp;H job · New York City</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="page-sec">
+      <div class="wrap qa">
+        <h2>Do you come out to <em>{nn}?</em></h2>
+        <div class="answer">
+          <p><strong>Yes.</strong> {n} is part of our regular service area across all five boroughs. Emergencies are handled 24/7; for installs, quotes and maintenance we set a time that works for you.</p>
+          <p>{a['note']}</p>
+          <p>Call <a href="tel:+13479514761" data-tel><span data-phone>347-951-4761</span></a> with the address and what’s going on.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-sec">
+      <div class="wrap">
+        <h2>What we handle in <em>{nn}.</em></h2>
+        <ul class="covers" role="list">
+{service_covers()}
+        </ul>
+      </div>
+    </section>
+
+    <section class="page-sec">
+      <div class="wrap">
+        <h2>After you <em>call.</em></h2>
+{STEPS}
+      </div>
+    </section>
+
+    <section class="page-sec">
+      <div class="wrap">
+        <h2>Other <em>boroughs.</em></h2>
+        <ul class="chips" role="list">
+{area_chips(slug)}
+        </ul>
+      </div>
+    </section>
+
+''' + page_end('Repair', f'In {nn}? <em>Call Mo.</em>')
+    write(f'service-areas/{slug}', html)

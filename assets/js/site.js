@@ -43,8 +43,7 @@ const SITE = {
   /* Header, hero meter and mobile action bar: one rAF-throttled scroll pass */
   const header = $('[data-header]');
   const bar = $('[data-action-bar]');
-  const walk = $('.walk');
-  const meter = $('.meter i');
+  const hero = $('[data-hero]');
   const request = $('#request');
   let requestVisible = false;
   let ticking = false;
@@ -52,9 +51,8 @@ const SITE = {
   function onScroll() {
     ticking = false;
     const y = scrollY;
-    const heroH = walk ? walk.offsetHeight : innerHeight;
-    header.classList.toggle('is-solid', y > heroH - 90);
-    if (meter) meter.style.setProperty('--progress', Math.min(1, Math.max(0, y / heroH)).toFixed(3));
+    const heroEnd = hero ? hero.offsetTop + hero.offsetHeight - 90 : 20;
+    header.classList.toggle('is-solid', y > heroEnd);
     if (bar) bar.classList.toggle('is-on', y > innerHeight * 0.6 && !requestVisible);
   }
   const schedule = () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } };
@@ -134,16 +132,15 @@ const SITE = {
 
   /* "How can we help" choices pre-select the request form */
   const select = $('[data-service-select]');
-  $$('[data-service]').forEach(a => a.addEventListener('click', () => {
-    const v = a.dataset.service;
-    const opt = [...select.options].find(o => o.value === v || o.text === v);
-    if (opt) select.value = opt.value;
-  }));
+  const pick = v => { if (!select || !v) return; const opt = [...select.options].find(o => o.value === v || o.text === v); if (opt) select.value = opt.value; };
+  $$('[data-service]').forEach(a => a.addEventListener('click', () => pick(a.dataset.service)));
+  // Service and area pages link to /?service=Name#request
+  pick(new URLSearchParams(location.search).get('service'));
 
   /* Request form */
   const form = $('[data-form]');
   const status = $('[data-status]');
-  form.addEventListener('submit', async e => {
+  if (form) form.addEventListener('submit', async e => {
     e.preventDefault();
     status.className = 'form-status';
     let firstBad = null;
@@ -187,7 +184,7 @@ const SITE = {
     status.textContent = 'Opening your email app with the request filled in…';
     status.classList.add('ok');
   });
-  $$('[required]', form).forEach(f => f.addEventListener('input', () => f.removeAttribute('aria-invalid')));
+  if (form) $$('[required]', form).forEach(f => f.addEventListener('input', () => f.removeAttribute('aria-invalid')));
 
   /* Van: only drive while the emergency section is on screen */
   const van = $('[data-van]');
@@ -195,7 +192,8 @@ const SITE = {
     new IntersectionObserver(([e]) => van.classList.toggle('is-driving', e.isIntersecting), { threshold: 0.1 }).observe(van.closest('section'));
   } else if (van) van.classList.add('is-driving');
 
-  /* Work gallery: filters, "show all", lightbox */
+  /* Work gallery: filters, "show all", lightbox (home page only) */
+  if (!$('[data-work]')) return;
   const tiles = $$('[data-work] .w');
   const moreBtn = $('[data-more]');
   const LIMIT = 12;
