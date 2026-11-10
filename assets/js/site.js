@@ -40,7 +40,7 @@ const SITE = {
     if (n) el.textContent = `${n} followers`;
   });
 
-  /* Header shadow and mobile action bar: one rAF-throttled scroll pass */
+  /* Header, hero meter and mobile action bar: one rAF-throttled scroll pass */
   const header = $('[data-header]');
   const bar = $('[data-action-bar]');
   const hero = $('[data-hero]');

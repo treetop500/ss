@@ -157,13 +157,15 @@ def head(title, desc, path):
   <link rel="apple-touch-icon" href="/assets/img/icon-180.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Rubik:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/css/mh.css">
-  <link rel="stylesheet" href="/assets/css/dark.css">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=JetBrains+Mono:wght@500;600&family=PT+Serif:wght@400;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/site.css">
+  <link rel="stylesheet" href="/assets/css/jobsite.css">
+  <link rel="stylesheet" href="/assets/css/pages.css">
+  <link rel="stylesheet" href="/assets/css/ultimate.css">
   <script>document.documentElement.classList.add('js')</script>
   <script src="/assets/js/site.js" defer></script>
 </head>
-<body>
+<body class="u-site">
   <a class="skip" href="#main">Skip to content</a>
 
 {TOP}
@@ -192,7 +194,17 @@ def service_covers(current=None):
     return '\n'.join(f'          <li><a href="/services/{k}/"><strong>{v["name"]}</strong><span>{v["lede"].split(".")[0]}.</span></a></li>' for k, v in SERVICES.items() if k != current)
 
 def page_end(form, heading):
-    return f'''  </main>
+    return f'''    <section class="page-cta">
+      <div class="wrap">
+        <h2>{heading}</h2>
+        <p>Emergencies: call any hour. Everything else: call or send a request and we’ll set a time.</p>
+        <div class="hero-cta">
+          <a class="btn btn-light btn-lg" href="tel:+13479514761" data-tel>{PHONE}Call <span data-phone>347-951-4761</span></a>
+          <a class="btn btn-outline btn-lg" href="/?service={form.replace(' ', '+')}#request">Send a request</a>
+        </div>
+      </div>
+    </section>
+  </main>
 
 {BOTTOM}
 </body>
