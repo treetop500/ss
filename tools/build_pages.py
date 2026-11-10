@@ -59,7 +59,7 @@ SERVICES = {
     lede='Boilers, water heaters and gas and electric heaters for homes and businesses. No heat in the middle of winter is an emergency: call any hour.',
     bgvideo=('/assets/media/water-heater-1.mp4', '/assets/media/water-heater-1.webp'),
     photo=('/assets/media/water-heater-2.mp4', 'Mo’s crew swapping a gas water heater in a basement', 'M&amp;H job · water heater swap'),
-    credits='Example photos, not M&amp;H jobs: <a href="https://commons.wikimedia.org/wiki/File:ModCon_boiler_system.jpg" target="_blank" rel="noopener">“ModCon boiler system”</a> by Audetat, <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a>; <a href="https://commons.wikimedia.org/wiki/File:Hydronic_Unit_Heater.jpg" target="_blank" rel="noopener">“Hydronic Unit Heater”</a> by SAF1999, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>, via Wikimedia Commons. Resized.',
+    credits='Photo credits: <a href="https://commons.wikimedia.org/wiki/File:ModCon_boiler_system.jpg" target="_blank" rel="noopener">“ModCon boiler system”</a> by Audetat, <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener">CC BY-SA 3.0</a>; <a href="https://commons.wikimedia.org/wiki/File:Hydronic_Unit_Heater.jpg" target="_blank" rel="noopener">“Hydronic Unit Heater”</a> by SAF1999, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>, via Wikimedia Commons. Resized.',
     q='The heat’s out. What should I check before calling?',
     a='''<p class="callout"><strong>If you smell gas, leave the building and call 911 from outside.</strong> Don’t flip switches or try to relight anything.</p>
           <p>Otherwise, a few quick checks:</p>
@@ -185,7 +185,7 @@ def media(src, alt, attrs='loading="lazy"'):
     return f'<img src="{src}" alt="{alt}" {attrs}>'
 
 def shots(items):
-    return '\n'.join(f'          <figure class="shot">{media(s, a)}<figcaption>{c}</figcaption></figure>' for s, a, c in items)
+    return '\n'.join(f'          <figure class="shot">{media(s, a)}</figure>' for s, a, c in items)
 
 def area_chips(current=None):
     return '\n'.join(f'          <li><a href="/service-areas/{k}/">{v["label"]}</a></li>' for k, v in AREAS.items() if k != current)
@@ -232,7 +232,7 @@ for slug, s in SERVICES.items():
           <p class="lede">{s['lede']}</p>
           {cta_buttons(s['form'])}
         </div>
-        <figure class="page-hero-photo">{media(src, alt, 'fetchpriority="high"')}<figcaption>{cap}</figcaption></figure>
+        <figure class="page-hero-photo">{media(src, alt, 'fetchpriority="high"')}</figure>
       </div>
     </section>
 
@@ -295,7 +295,7 @@ for slug, a in AREAS.items():
           <p class="lede">{a['lede']}</p>
           {cta_buttons('Repair')}
         </div>
-        <figure class="page-hero-photo"><img src="/assets/work/{a['photo']}.webp" alt="Outdoor units on an M&amp;H job" fetchpriority="high"><figcaption>M&amp;H job</figcaption></figure>
+        <figure class="page-hero-photo"><img src="/assets/work/{a['photo']}.webp" alt="Outdoor units on an M&amp;H job" fetchpriority="high"></figure>
       </div>
     </section>
 
