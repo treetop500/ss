@@ -19,7 +19,7 @@ SERVICES = {
     title='Commercial Refrigeration Repair in NYC | Walk-in Coolers &amp; Deli Cases | M&amp;H HVAC',
     desc='Walk-in cooler, walk-in freezer, deli case and commercial fridge repair and installation in all 5 NYC boroughs. 24/7 for emergencies. Call 347-951-4761.',
     h1='Commercial refrigeration repair in <em>New York City.</em>',
-    lede='Walk-in coolers, walk-in freezers, deli cases, open cases and glass-door fridges for delis, markets and restaurants. When a box goes warm, call any hour.',
+    lede='Walk-in coolers, walk-in freezers, deli cases, open cases, glass-door fridges and commercial ice machines for delis, markets and restaurants. When a box goes warm, call any hour.',
     photo=('/assets/work/7ee8f78b.webp', 'Two condensing units M&amp;H installed, labelled for a deli case and a walk-in box', 'M&amp;H job · units for a deli case and walk-in'),
     q='My walk-in isn’t holding temperature. What should I do until you get here?',
     a='''<p><strong>Call us first</strong>, then do what you can to slow the warm-up:</p>
@@ -30,8 +30,26 @@ SERVICES = {
             <li>If another cooler is holding, move the most sensitive product into it.</li>
           </ol>
           <p>On site we check the condensing unit outside, the evaporator and defrost inside, and the door, then tell you what failed and what it takes to fix.</p>''',
-    covers=[('Walk-in coolers', 'Boxes, doors, evaporators and the condensing units that run them.'), ('Walk-in freezers', 'Low-temp boxes, defrost problems, iced-up coils.'), ('Deli cases', 'Service and display cases that have to hold temp all day.'), ('Open cases', 'Open-front grab-and-go cases and their units.'), ('Glass-door fridges', 'Reach-in coolers and full runs of cooler doors.')],
+    covers=[('Walk-in coolers', 'Boxes, doors, evaporators and the condensing units that run them.'), ('Walk-in freezers', 'Low-temp boxes, defrost problems, iced-up coils.'), ('Deli cases', 'Service and display cases that have to hold temp all day.'), ('Open cases', 'Open-front grab-and-go cases and their units.'), ('Glass-door fridges', 'Reach-in coolers and full runs of cooler doors.'), ('Ice machines', 'Commercial ice machine service for restaurants and other businesses. <a href="/services/ice-machine-service/">Explore ice machine service</a>.')],
     shots=[('/assets/work/commercial-ice-machine-sm.webp', 'Commercial ice machine with an M&amp;H HVAC service sticker in a restaurant kitchen', 'Commercial ice machine · restaurant kitchen'), ('/assets/work/ice-machine-bin-sm.webp', 'Open commercial ice machine bin filled with ice', 'Ice machine · full ice bin'), ('/assets/work/fd72f06d-sm.webp', 'Curved glass deli case M&amp;H installed', 'Deli case install'), ('/assets/work/c01c44b5-sm.webp', 'A full run of glass-door fridges in a market buildout', 'Glass-door fridges · market'), ('/assets/work/80ff66cd-sm.webp', 'Row of refrigeration units on a rooftop', 'Refrigeration units · rooftop'), ('/assets/work/f8306ac4-sm.webp', 'Condensing units mounted on a wall for open cases', 'Units for open cases'), ('/assets/work/2298e119-sm.webp', 'Refrigeration unit mounted on a brick wall', 'Wall-mounted unit'), ('/assets/work/81988476-sm.webp', 'Deli service cases on a store floor', 'Deli service cases')],
+  ),
+  'ice-machine-service': dict(
+    name='Ice machine service', form='Refrigeration',
+    title='Commercial Ice Machine Service in NYC | M&amp;H HVAC',
+    desc='Commercial ice machine service for restaurants and businesses in NYC, Long Island and New Jersey. Not making ice or keeping up? Call M&amp;H HVAC at 347-951-4761.',
+    h1='Commercial ice machine service in <em>New York City.</em>',
+    lede='Ice machine not making ice or keeping up with your kitchen? M&amp;H HVAC services commercial ice machines for restaurants and other businesses across NYC, Long Island and New Jersey.',
+    photo=('/assets/work/commercial-ice-machine.webp', 'Commercial ice machine with an M&amp;H HVAC service sticker in a restaurant kitchen', 'M&amp;H job · commercial ice machine'),
+    q='What should I tell you when I call about an ice machine?',
+    a='''<p>Tell us the business address, the machine’s make and model if you have them, and what has changed:</p>
+          <ul>
+            <li>Whether it has stopped making ice or is producing less than usual.</li>
+            <li>Any error message shown on the display.</li>
+            <li>When the issue started and when we can access the kitchen.</li>
+          </ul>
+          <p>A photo of the machine and its model label can help. We check the equipment on site, explain what we find and discuss the work before starting.</p>''',
+    covers=[('Not making ice', 'Service for commercial machines that have stopped producing ice.'), ('Low ice production', 'Troubleshooting when the machine is no longer keeping up.'), ('Commercial kitchens', 'Ice machine service for restaurants and other businesses.')],
+    shots=[('/assets/work/commercial-ice-machine-sm.webp', 'Commercial ice machine with an M&amp;H HVAC service sticker in a restaurant kitchen', 'Commercial ice machine · restaurant kitchen'), ('/assets/work/ice-machine-bin-sm.webp', 'Open commercial ice machine bin filled with ice', 'Ice machine · full ice bin')],
   ),
   'mini-split-installation': dict(
     name='Mini splits &amp; AC', form='New install',
